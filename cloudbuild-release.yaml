@@ -1,0 +1,10 @@
+steps:
+  - name: 'golang:1.12.12-stretch'
+    entrypoint: 'go'
+    args: ['build', '.']
+    env: ['GO111MODULE=on']
+  - name: 'gcr.io/kaniko-project/executor:v0.13.0'
+    args:
+      - --destination=gcr.io/$PROJECT_ID/sinmetal/firestore_export_debug:$TAG_NAME
+      - --cache=true
+      - --cache-ttl=6h
